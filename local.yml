@@ -65,8 +65,6 @@
       loop: "{{ zsh_config }}"
 
     - name: Set local_user shell to zsh
-      become: yes
-      become_user: "{{ local_user }}"
       user:
         name: "{{ local_user }}"
         shell: /bin/zsh
