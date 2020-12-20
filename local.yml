@@ -27,6 +27,8 @@
     #     classic: yes
 
     - name: Download ozsh install script
+      become: yes
+      remote_use: tiago
       get_url:
         url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
         dest: ~/Downloads/0h-my-zsh-installer.sh
@@ -36,6 +38,8 @@
   handlers:
     - name: Execute ozsh install script
       shell: ~/Downloads/0h-my-zsh-installer.sh
+      become: yes
+      remote_use: tiago
 
   
 
