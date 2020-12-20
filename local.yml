@@ -2,6 +2,7 @@
   connection: local
   become: true
   vars:
+    local_user: tiago
     apt_packages:
       - htop
       - python3-pip
@@ -40,7 +41,7 @@
 
     - name: Download oh-my-zsh install script
       become: yes
-      become_user: tiago
+      become_user: "{{ local_user }}"
       get_url:
         url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
         dest: ~/Downloads/0h-my-zsh-installer.sh
@@ -49,7 +50,7 @@
 
     - name: Clone oh-my-zsh repos
       become: yes
-      become_user: tiago
+      become_user: "{{ local_user }}"
       git:
         repo: "{{ item.repo }}"
         dest: "{{ item.dest }}"
@@ -57,7 +58,7 @@
 
     - name: Download zsh config files
       become: yes
-      become_user: tiago
+      become_user: "{{ local_user }}"
       get_url:
         url: "{{ item.url }}"
         dest: "{{ item.dest }}"
@@ -67,7 +68,7 @@
     - name: Execute oh-my-zsh install script
       shell: ~/Downloads/0h-my-zsh-installer.sh
       become: yes
-      become_user: tiago
+      become_user: "{{ local_user }}"
 
   
 
