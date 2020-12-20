@@ -26,17 +26,16 @@
     #     name: "{{ snap_packages }}"
     #     classic: yes
 
+    - name: Download ozsh install script
+      get_url:
+        url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+        dest: ~/Downloads/0h-my-zsh-installer.sh
+        mode: u+rwx
+      notify: Execute ozsh install script
 
-  - name: Download ozsh install script
-    get_url:
-      url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-      dest: ~/Downloads/0h-my-zsh-installer.sh
-      mode: u+rwx
-    notify: Execute ozsh install script
-
-handlers:
-  - name: Execute ozsh install script
-    shell: ~/Downloads/0h-my-zsh-installer.sh
+  handlers:
+    - name: Execute ozsh install script
+      shell: ~/Downloads/0h-my-zsh-installer.sh
 
   
 
