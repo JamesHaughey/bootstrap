@@ -28,6 +28,11 @@
         dest: ~/.zshrc
       - url: https://raw.githubusercontent.com/JamesHaughey/linux_installs/master/dotfiles/.p10k.zsh
         dest: ~/.p10k.zsh
+    fonts:
+      - MesloLGS%20NF%20Regular.ttf
+      - MesloLGS%20NF%20Bold.ttf
+      - MesloLGS%20NF%20Italic.ttf
+      - MesloLGS%20NF%20Bold%20Italic.ttf
 
   tasks:
     - name: Install apt packages
@@ -63,6 +68,20 @@
         url: "{{ item.url }}"
         dest: "{{ item.dest }}"
       loop: "{{ zsh_config }}"
+
+    - name: Create fonts folder
+      file:
+        path: ~/.fonts/
+        state: directory
+        mode: "0755"
+
+    - name: Download Fonts
+      become: yes
+      become_user: "{{ local_user }}"
+      get_url:
+        url: "https://github.com/romkatv/powerlevel10k-media/raw/master/{{ item }}"
+        dest: "~/.fonts/{{ item }}"
+      loop: "{{ fonts }}"
 
     - name: Set local_user shell to zsh
       user:
