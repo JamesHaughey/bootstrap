@@ -60,6 +60,8 @@
         classic: yes
 
     - name: Install VS Code Extensions
+      become: yes
+      become_user: "{{ local_user }}"
       command: "code --install-extension {{ item }}"
       loop: "{{ vs_code_extensions }}"
 
