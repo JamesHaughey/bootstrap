@@ -111,6 +111,14 @@
         name: "{{ local_user }}"
         shell: /bin/zsh
 
+    - name: set up sudo for local user
+      template:
+        src: files/user_sudo.j2
+        dest: "/etc/sudoers.d/{{ local_user }}"
+        owner: root
+        group: root
+        mode: 0440
+
   handlers:
     - name: Execute oh-my-zsh install script
       shell: ~/Downloads/0h-my-zsh-installer.sh
