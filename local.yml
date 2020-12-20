@@ -15,6 +15,18 @@
     snap_packages:
       - code
       - gitkraken
+    oh_my_zsh_repos:
+      - repo: https://github.com/romkatv/powerlevel10k.git
+        dest: ~/.oh-my-zsh/custom/themes/powerlevel10k
+      - repo: https://github.com/zsh-users/zsh-autosuggestions
+        dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+      - repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+        dest: ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+    zsh_config:
+      - url: https://raw.githubusercontent.com/JamesHaughey/linux_installs/master/dotfiles/.zshrc
+        dest: ~/.zshrc
+      - url: https://raw.githubusercontent.com/JamesHaughey/linux_installs/master/dotfiles/.p10k.zsh
+        dest: ~/.p10k.zsh
 
   tasks:
     - name: Install apt packages
@@ -26,17 +38,29 @@
         name: "{{ snap_packages }}"
         classic: yes
 
-    - name: Download ozsh install script
+    - name: Download oh-my-zsh install script
       become: yes
       become_user: tiago
       get_url:
         url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
         dest: ~/Downloads/0h-my-zsh-installer.sh
         mode: u+rwx
-      notify: Execute ozsh install script
+      notify: Execute oh-my-zsh install script
+
+    - name: Clone oh-my-zsh repos
+      git:
+        repo: "{{ item.repo }}"
+        dest: "{{ item.dest }}"
+      loop: "{{ oh_my_zsh_repos }}"
+
+    - name: Download zsh config files
+      get_url:
+        url: "{{ item.url }}"
+        dest: "{{ item.dest }}"
+      loop: "{{ zsh_config }}"
 
   handlers:
-    - name: Execute ozsh install script
+    - name: Execute oh-my-zsh install script
       shell: ~/Downloads/0h-my-zsh-installer.sh
       become: yes
       become_user: tiago
