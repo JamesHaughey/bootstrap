@@ -46,7 +46,6 @@
         url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
         dest: ~/Downloads/0h-my-zsh-installer.sh
         mode: u+rwx
-      state: present
       notify: Execute oh-my-zsh install script
 
     - name: Clone oh-my-zsh repos
