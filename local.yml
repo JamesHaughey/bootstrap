@@ -1,8 +1,18 @@
- - hosts: localhost
-   connection: local
-   become: true
- 
-   tasks:
-   - name: Install htop
-     apt:
-       name: htop
+- hosts: localhost
+  connection: local
+  become: true
+  vars:
+    apt_packages:
+    - htop
+    - python3-pip
+    - python3-venv
+    - zsh
+    - git
+    - curl
+    - solaar
+    - tilix
+    - gnome-tweaks
+  tasks:
+  - name: Install htop
+    apt:
+      name: "{{ apt_packages }}"
