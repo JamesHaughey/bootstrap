@@ -21,10 +21,10 @@
       apt:
         name: "{{ apt_packages }}"
 
-    # - name: Install snap packages
-    #   community.general.snap:
-    #     name: "{{ snap_packages }}"
-    #     classic: yes
+    - name: Install snap packages
+      community.general.snap:
+        name: "{{ snap_packages }}"
+        classic: yes
 
     - name: Download ozsh install script
       become: yes
