@@ -33,6 +33,21 @@
       - MesloLGS%20NF%20Bold.ttf
       - MesloLGS%20NF%20Italic.ttf
       - MesloLGS%20NF%20Bold%20Italic.ttf
+    vs_code_extensions:
+      - ms-python.python
+      - mhutchie.git-graph
+      - eamodio.gitlens
+      - codezombiech.gitignore
+      - esbenp.prettier-vscode
+      - hackmd.vscode-hackmd
+      - yzhang.markdown-all-in-one
+      - redhat.vscode-yaml
+      - ms-vscode-remote.vscode-remote-extensionpack
+      - dahong.theme-bear
+      - pkief.material-icon-theme
+      - mechatroner.rainbow-csv
+      - oderwat.indent-rainbow
+      - 2gua.rainbow-brackets
 
   tasks:
     - name: Install apt packages
@@ -43,6 +58,10 @@
       community.general.snap:
         name: "{{ snap_packages }}"
         classic: yes
+
+    - name: Install VS Code Extensions
+      command: "code --install-extension {{ item }}"
+      loop: "{{ vs_code_extensions }}"
 
     - name: Download oh-my-zsh install script
       become: yes
