@@ -1,1 +1,2 @@
+ansible-galaxy collection install community.general
 sudo ansible-pull -v -U https://github.com/JamesHaughey/bootstrap.git

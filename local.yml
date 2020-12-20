@@ -21,23 +21,22 @@
       apt:
         name: "{{ apt_packages }}"
 
-    - name: Install snap packages
-      community.general.snap:
-        name: "{{ snap_packages }}"
-        classic: yes
+    # - name: Install snap packages
+    #   community.general.snap:
+    #     name: "{{ snap_packages }}"
+    #     classic: yes
 
 
-  # - name: Download install script
-  #   get_url:
-  #     url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-  #     dest: ~/Downloads/0h-my-zsh-installer.sh
-  #     mode: u+rwx
+  - name: Download ozsh install script
+    get_url:
+      url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+      dest: ~/Downloads/0h-my-zsh-installer.sh
+      mode: u+rwx
+    notify: Execute ozsh install script
 
-  # - name: Execute install script
-  #   shell: ~/Downloads/0h-my-zsh-installer.sh
-  # - name: Remove the install script
-  #   file:
-  #     path: ~/Downloads/0h-my-zsh-installer.sh
-  #     state: absent
-  # handlers:
+handlers:
+  - name: Execute ozsh install script
+    shell: ~/Downloads/0h-my-zsh-installer.sh
+
+  
 
