@@ -70,6 +70,8 @@
       loop: "{{ zsh_config }}"
 
     - name: Create fonts folder
+      become: yes
+      become_user: "{{ local_user }}"
       file:
         path: ~/.fonts/
         state: directory
