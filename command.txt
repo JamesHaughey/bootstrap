@@ -1,1 +1,1 @@
-sudo ansible-pull -U https://github.com/JamesHaughey/bootstrap.git
+sudo ansible-pull -v -U https://github.com/JamesHaughey/bootstrap.git

@@ -17,13 +17,14 @@
       - gitkraken
 
   tasks:
-  - name: Install apt packages
-    apt:
-      name: "{{ apt_packages }}"
-  - name: Install snap packages
-    community.general.snap:
-      name: "{{ snap_packages }}"
-      classic: yes
+    - name: Install apt packages
+      apt:
+        name: "{{ apt_packages }}"
+
+    - name: Install snap packages
+      community.general.snap:
+        name: "{{ snap_packages }}"
+        classic: yes
 
 
   # - name: Download install script
