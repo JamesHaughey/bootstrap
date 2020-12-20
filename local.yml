@@ -48,12 +48,16 @@
       notify: Execute oh-my-zsh install script
 
     - name: Clone oh-my-zsh repos
+      become: yes
+      become_user: tiago
       git:
         repo: "{{ item.repo }}"
         dest: "{{ item.dest }}"
       loop: "{{ oh_my_zsh_repos }}"
 
     - name: Download zsh config files
+      become: yes
+      become_user: tiago
       get_url:
         url: "{{ item.url }}"
         dest: "{{ item.dest }}"
