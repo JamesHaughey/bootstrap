@@ -117,6 +117,13 @@
         dest: ~/.local/share/icons/
         remote_src: yes
 
+    - name: Replace Tweaks icon
+      become: yes
+      become_user: "{{ local_user }}"
+      copy:
+        src: ~/.local/share/icons/Hey-classic-dark/64/apps/fluid.svg
+        dest: ~/.local/share/icons/Hey-classic-dark/64/apps/org.gnome.tweaks.svg 
+
     - name: Set local_user shell to zsh
       user:
         name: "{{ local_user }}"
