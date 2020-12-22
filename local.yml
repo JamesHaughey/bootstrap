@@ -94,9 +94,12 @@
       become: yes
       become_user: "{{ local_user }}"
       file:
-        path: ~/.fonts/
+        path: "{{ item }}"
         state: directory
         mode: "0755"
+      loop:
+        - ~/.fonts/
+        - ~/.local/share/icons/
 
     - name: Download Fonts
       become: yes
