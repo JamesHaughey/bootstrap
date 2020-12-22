@@ -106,6 +106,14 @@
         dest: "~/.fonts/{{ item }}"
       loop: "{{ fonts }}"
 
+    - name: Unarchive icons file
+      become: yes
+      become_user: "{{ local_user }}"
+      unarchive:
+        src: https://github.com/JamesHaughey/linux_installs/raw/master/Hey-classic.tar.gz
+        dest: ~/.local/share/icons/
+        remote_src: yes
+
     - name: Set local_user shell to zsh
       user:
         name: "{{ local_user }}"
