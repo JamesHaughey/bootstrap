@@ -121,7 +121,8 @@
       become: yes
       become_user: "{{ local_user }}"
       copy:
-        remote_src: ~/.local/share/icons/Hey-classic-dark/64/apps/fluid.svg
+        src: ~/.local/share/icons/Hey-classic-dark/64/apps/fluid.svg
+        remote_src: yes
         dest: ~/.local/share/icons/Hey-classic-dark/64/apps/org.gnome.tweaks.svg 
 
     - name: Set local_user shell to zsh
