@@ -74,22 +74,6 @@
         mode: u+rwx
       notify: Execute oh-my-zsh install script
 
-    - name: Clone oh-my-zsh repos
-      become: yes
-      become_user: "{{ local_user }}"
-      git:
-        repo: "{{ item.repo }}"
-        dest: "{{ item.dest }}"
-      loop: "{{ oh_my_zsh_repos }}"
-
-    - name: Download zsh config files
-      become: yes
-      become_user: "{{ local_user }}"
-      get_url:
-        url: "{{ item.url }}"
-        dest: "{{ item.dest }}"
-      loop: "{{ zsh_config }}"
-
     - name: Create fonts folder
       become: yes
       become_user: "{{ local_user }}"
@@ -143,6 +127,21 @@
       shell: ~/Downloads/0h-my-zsh-installer.sh
       become: yes
       become_user: "{{ local_user }}"
+      notify: Clone oh-my-zsh repos
 
-  
+    - name: Clone oh-my-zsh repos
+      become: yes
+      become_user: "{{ local_user }}"
+      git:
+        repo: "{{ item.repo }}"
+        dest: "{{ item.dest }}"
+      loop: "{{ oh_my_zsh_repos }}"
+      notify: Download zsh config files
 
+    - name: Download zsh config files
+      become: yes
+      become_user: "{{ local_user }}"
+      get_url:
+        url: "{{ item.url }}"
+        dest: "{{ item.dest }}"
+      loop: "{{ zsh_config }}"
